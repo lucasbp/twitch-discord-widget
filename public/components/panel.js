@@ -1,52 +1,39 @@
-$(document).ready(function() {
-    console.log(`Running ${Twitch.ext.version} on ${Twitch.ext.environment}`);
+let token, channelId, config, theme;
+const twitch = window.Twitch.ext;
 
-    Panel.init();
-    Panel.request();
+twitch.onContext((context) => {
+    twitch.rig.log(context);
+    theme = context.theme;
 });
 
-var Panel = {
+twitch.onAuthorized((auth) => {
+    token = auth.token;
+    channelId = auth.channelId;
+
+    if (typeof twitch.configuration.broadcaster == "undefined") {
+        config = {};
+    }
+    else {
+        config = JSON.parse(twitch.configuration.broadcaster.content);
+        DiscordPanel.init();
+    }
+});
+
+var DiscordPanel = {
     serverId: null,
     discordApi: null,
 
     init: function() {
-        var serverId = Panel.getConfig('serverId');
-
-        Panel.serverId = serverId;
-        Panel.discordApi = 'https://discordapp.com/api/guilds/' + Panel.serverId + '/widget.json';
-
-        if (Twitch.ext) {
-            Twitch.ext.onAuthorized(function() {
-
-            });
-
-            Twitch.ext.onContext((context) => {
-                if (context && context.theme) {
-                    //actions.setTheme(context.theme);
-                }
-            });
-
-            Twitch.ext.configuration.onChanged(function() {
-
-            });
-
-            Twitch.ext.onError((error) => console.log(error));
-        }
-    },
-
-    getConfig: function(name) {
-        var configs = Twitch.ext.configuration.global;
-
-        return configs;
+        DiscordPanel.serverId = config.serverId;
+        DiscordPanel.discordApi = 'https://discordapp.com/api/guilds/' + DiscordPanel.serverId + '/widget.json';
     },
 
     request: function() {
         $.ajax({
             method: 'GET',
-            url: Panel.discordApi,
-            cache: false
+            url: DiscordPanel.discordApi
         }).done(function(data) {
-            console.log(data);
+            twitch.rig.log(data);
         });
     }
-}
+};

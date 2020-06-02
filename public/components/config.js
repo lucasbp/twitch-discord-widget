@@ -1,19 +1,45 @@
+let token, userId, config, theme;
+const twitch = window.Twitch.ext;
+
+twitch.onContext((context) => {
+    twitch.rig.log(context);
+    theme = context.theme;
+});
+
+twitch.onAuthorized((auth) => {
+	token = auth.token;
+    userId = auth.userId;
+    config = Config.get();
+});
+
 $(document).ready(function() {
-    Config.init();
+    //Config.init();
 });
 
 var Config = {
     init: function() {
-        Config.set('broadcaster', 'teste', '1');
-        console.log(Config.get('broadcaster'));
+        var config = {
+			'serverId': '714271377594777640'
+        };
+
+        Config.set(config);
+        console.log(twitch.configuration.broadcaster);
     },
 
-    get: function(segment) {
-        var configs = Twitch.ext.configuration[segment];
-        return configs;
+    get: function() {
+        var configs;
+
+        if (typeof twitch.configuration.broadcaster == "undefined") {
+            configs = {};
+        }
+        else {
+            configs = twitch.configuration.broadcaster.content;
+        }
+
+        return JSON.parse(configs);
     },
 
-    set: function(segment, key, value) {
-        return Twitch.ext.configuration.set(segment, '0.0.1', `{"${key}": "${value}"}`);
+    set: function(data) {
+        twitch.configuration.set('broadcaster', '', JSON.stringify(data));
     }
 }
