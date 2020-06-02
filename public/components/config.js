@@ -3,21 +3,49 @@ twitch.configuration.onChanged(() => {
 
     if (cfg) {
         if (cfg.hasOwnProperty('serverId')) {
-            $('#serverId').val(cfg.serverId);
+            $('#server-id').val(cfg.serverId);
         }
     }
 });
 
 $(document).ready(function() {
-
-    $('#configsForm').submit(function(e) {
+    $('#configs-form').submit(function(e) {
         e.preventDefault();
 
-        var form = {
-            'serverId': $('#serverId').val()
+        $('#config-submit').attr('disabled', true);
+        $('.success, .error').html('').hide();
+
+        let status = {
+            error: false,
+            errorMessage: null
         };
 
-        config.set(form);
+        if ( ! $('#server-id').val()) {
+            status.error = true;
+            status.errorMessage = "Server ID cannot be empty!";
+        }
+
+        if (status.error) {
+            $('.error').html(status.errorMessage).show();
+            $('#config-submit').attr('disabled', false);
+        }
+        else {
+            var form = {
+                'serverId': $('#server-id').val()
+            };
+
+            config.set(form);
+
+            if (config.get()) {
+                setTimeout(function() {
+                    $('.success').html('Extension enabled successfully!').show();
+                    $('#config-submit').attr('disabled', false);
+                }, 1000);
+            }
+            else {
+                $('.error').html('The configuration could not be saved, please try again later!').show();
+            }
+        }
     });
 
 });

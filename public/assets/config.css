@@ -1,0 +1,99 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    background-color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+}
+
+a:link {
+    color: royalblue;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:visited {
+    color: royalblue;
+    text-decoration: none;
+}
+
+header {
+    padding: 15px;
+    background-color: rgb(45, 45, 45);
+    color: white;
+    text-align: center;
+    font-size: 18px;
+}
+
+main {
+    border: 1px solid rgb(200, 200, 200);
+}
+
+ul {
+    list-style-type: decimal !important;
+}
+
+ul li {
+    margin-bottom: 10px;
+}
+
+label {
+    display: block;
+    margin-bottom: 3px;
+    font-weight: bold;
+}
+
+input[type=text] {
+    display: block;
+    margin-bottom: 5px;
+    padding: 5px;
+}
+
+input[type=submit] {
+    display: block;
+    padding: 6px 20px;
+    background-color: rgb(0, 125, 0);
+    color: white;
+    font-weight: bold;
+    border-radius: 4px;
+    border: 1px solid rgb(0, 150, 0);
+}
+
+input[type=submit]:hover {
+    background-color: rgb(0, 150, 0);
+}
+
+input[type=submit]:disabled {
+    background-color: rgb(115, 115, 115);
+    border: 1px solid rgb(100, 100, 100);
+}
+
+#box-form {
+    padding: 20px;
+    background-color: rgb(200, 200, 200);
+}
+
+#box-conf-guide {
+    padding: 10px;
+}
+
+.required {
+    font-weight: bold;
+    color: red;
+}
+
+.success {
+    display: none;
+    margin: 0 0 10px;
+    color: green;
+}
+
+.error {
+    display: none;
+    margin: 0 0 10px;
+    color: red;
+}
