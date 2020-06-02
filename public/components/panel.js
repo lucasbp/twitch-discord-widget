@@ -1,39 +1,29 @@
-let token, channelId, config, theme;
-const twitch = window.Twitch.ext;
-
-twitch.onContext((context) => {
-    twitch.rig.log(context);
-    theme = context.theme;
+twitch.configuration.onChanged(() => {
+    discordPanel.init();
+    console.log('teste');
 });
 
-twitch.onAuthorized((auth) => {
-    token = auth.token;
-    channelId = auth.channelId;
-
-    if (typeof twitch.configuration.broadcaster == "undefined") {
-        config = {};
-    }
-    else {
-        config = JSON.parse(twitch.configuration.broadcaster.content);
-        DiscordPanel.init();
-    }
-});
-
-var DiscordPanel = {
+var discordPanel = {
     serverId: null,
-    discordApi: null,
+    Api: null,
 
     init: function() {
-        DiscordPanel.serverId = config.serverId;
-        DiscordPanel.discordApi = 'https://discordapp.com/api/guilds/' + DiscordPanel.serverId + '/widget.json';
+        let cfg = config.get();
+
+        discordPanel.serverId = cfg.serverId;
+        discordPanel.Api = 'https://discordapp.com/api/guilds/' + discordPanel.serverId + '/widget.json';
+
+        discordPanel.request();
     },
 
     request: function() {
         $.ajax({
             method: 'GET',
-            url: DiscordPanel.discordApi
+            url: discordPanel.Api
         }).done(function(data) {
-            twitch.rig.log(data);
+            console.log(data);
+        }).fail(function(xhr) {
+            console.log(xhr.responseJSON);
         });
     }
 };

@@ -1,45 +1,23 @@
-let token, userId, config, theme;
-const twitch = window.Twitch.ext;
+twitch.configuration.onChanged(() => {
+    let cfg = config.get();
 
-twitch.onContext((context) => {
-    twitch.rig.log(context);
-    theme = context.theme;
-});
-
-twitch.onAuthorized((auth) => {
-	token = auth.token;
-    userId = auth.userId;
-    config = Config.get();
+    if (cfg) {
+        if (cfg.hasOwnProperty('serverId')) {
+            $('#serverId').val(cfg.serverId);
+        }
+    }
 });
 
 $(document).ready(function() {
-    //Config.init();
-});
 
-var Config = {
-    init: function() {
-        var config = {
-			'serverId': '714271377594777640'
+    $('#configsForm').submit(function(e) {
+        e.preventDefault();
+
+        var form = {
+            'serverId': $('#serverId').val()
         };
 
-        Config.set(config);
-        console.log(twitch.configuration.broadcaster);
-    },
+        config.set(form);
+    });
 
-    get: function() {
-        var configs;
-
-        if (typeof twitch.configuration.broadcaster == "undefined") {
-            configs = {};
-        }
-        else {
-            configs = twitch.configuration.broadcaster.content;
-        }
-
-        return JSON.parse(configs);
-    },
-
-    set: function(data) {
-        twitch.configuration.set('broadcaster', '', JSON.stringify(data));
-    }
-}
+});
