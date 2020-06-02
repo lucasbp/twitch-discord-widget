@@ -1,6 +1,5 @@
 twitch.configuration.onChanged(() => {
     discordPanel.init();
-    console.log('teste');
 });
 
 var discordPanel = {
@@ -13,10 +12,10 @@ var discordPanel = {
         discordPanel.serverId = cfg.serverId;
         discordPanel.Api = 'https://discordapp.com/api/guilds/' + discordPanel.serverId + '/widget.json';
 
-        discordPanel.request();
+        discordPanel.call();
     },
 
-    request: function() {
+    call: function() {
         $.ajax({
             method: 'GET',
             url: discordPanel.Api

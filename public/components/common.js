@@ -9,6 +9,14 @@ twitch.onAuthorized((auth) => {
 
 twitch.onContext((context) => {
     theme = context.theme;
+
+    if ($('#discord-widget').length > 0 && $('#discord-widget').is(':visible')) {
+        let element = $('#discord-widget .widget');
+
+        element.removeClass('widget-theme-dark');
+        element.removeClass('widget-theme-light');
+        element.addClass('widget-theme-' + theme)
+    }
 });
 
 var config = {

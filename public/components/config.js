@@ -37,11 +37,9 @@ $(document).ready(function() {
             config.set(form);
 
             if (config.get()) {
-                setTimeout(function() {
-                    $('.success').html('Extension enabled successfully!').show();
-                    $('#config-submit').attr('disabled', false);
-                }, 1000);
-            }
+                $('.success').html('Extension enabled successfully!').show();
+                $('#config-submit').attr('disabled', false);
+        }
             else {
                 $('.error').html('The configuration could not be saved, please try again later!').show();
             }
