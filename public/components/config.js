@@ -1,13 +1,3 @@
-twitch.configuration.onChanged(() => {
-    let cfg = config.get();
-
-    if (cfg) {
-        if (cfg.hasOwnProperty('serverId')) {
-            $('#server-id').val(cfg.serverId);
-        }
-    }
-});
-
 $(document).ready(function() {
     $('#configs-form').submit(function(e) {
         e.preventDefault();
@@ -34,16 +24,26 @@ $(document).ready(function() {
                 'serverId': $('#server-id').val()
             };
 
-            config.set(form);
+            ConfigHelper.set(form);
 
-            if (config.get()) {
+            if (ConfigHelper.get()) {
                 $('.success').html('Extension enabled successfully!').show();
                 $('#config-submit').attr('disabled', false);
-        }
+            }
             else {
                 $('.error').html('The configuration could not be saved, please try again later!').show();
             }
         }
     });
 
+});
+
+twitch.configuration.onChanged(() => {
+    let cfg = ConfigHelper.get();
+
+    if (cfg) {
+        if (cfg.hasOwnProperty('serverId')) {
+            $('#server-id').val(cfg.serverId);
+        }
+    }
 });

@@ -1,53 +1,65 @@
-twitch.configuration.onChanged(() => {
-    discordPanel.init();
+twitch.onContext((context) => {
+    let theme = context.theme;
+
+    if ($('#discord-widget').length > 0 && $('#discord-widget').is(':visible')) {
+        let element = $('#discord-widget .widget');
+
+        element.removeClass('widget-theme-dark');
+        element.removeClass('widget-theme-light');
+        element.addClass('widget-theme-' + theme);
+    }
 });
 
-var discordPanel = {
-    serverId: null,
-    Api: null,
+twitch.configuration.onChanged(() => {
+    PanelController.init();
+});
+
+const PanelController = {
 
     init: function() {
-        let cfg = config.get();
-
-        discordPanel.serverId = cfg.serverId;
-        discordPanel.Api = 'https://discordapp.com/api/guilds/' + discordPanel.serverId + '/widget.json';
-
-        discordPanel.call();
+        PanelController.call();
     },
 
     call: function() {
-        $.ajax({
-            method: 'GET',
-            url: discordPanel.Api
-        }).done(function(data) {
-            let membersContent = "";
+        let interval = (1000 * 60) * 15; // 15 minutes
 
-            if (data.instant_invite) {
-                $('.widgetLogo, .widgetBtnConnect').attr('href', data.instant_invite);
-            }
+        let discordRequest = function() {
+             DiscordHelper.request().done(function(data) {
+                let membersContent = "";
 
-            $('.widgetHeaderCount').html(`<strong>${data.presence_count}</strong> Members Online`);
+                if (data.instant_invite) {
+                    $('.widgetLogo, .widgetBtnConnect').attr('href', data.instant_invite);
+                }
 
-            for (var i in data.members) {
-                let status = data.members[i].status;
-                status = (status.charAt(0).toUpperCase() + status.slice(1));
+                $('.widgetHeaderCount').html(`<strong>${data.presence_count}</strong> Members Online`);
 
-                membersContent += `<div class="widgetMember-s">
-                                        <div class="widgetMemberAvatar">
-                                            <img alt="" src="${data.members[i].avatar_url}">
-                                            <span class="widgetMemberStatus widgetMemberStatus${status}"></span>
-                                        </div>
-                                        <span class="widgetMemberName">${data.members[i].username}</span>
-                                        <!--<span class="widgetMemberGame">VALORANT</span>-->
-                                    </div>`;
-            }
+                for (var i in data.members) {
+                    let member = data.members[i];
+                    let status = member.status;
 
-            if (membersContent != "") {
-                $('.widgetBody').append('<div>' + membersContent + '</div>');
-            }
+                    status = (status.charAt(0).toUpperCase() + status.slice(1));
 
-        }).fail(function(xhr) {
-            console.log(xhr.responseJSON);
-        });
+                    membersContent += `<div class="widgetMember-s">
+                                            <div class="widgetMemberAvatar">
+                                                <img alt="" src="${member.avatar_url}">
+                                                <span class="widgetMemberStatus widgetMemberStatus${status}"></span>
+                                            </div>
+                                            <span class="widgetMemberName">${member.username}</span>
+                                            <!--<span class="widgetMemberGame">VALORANT</span>-->
+                                        </div>`;
+                }
+
+                if (membersContent != "") {
+                    $('.widgetBody').append('<div>' + membersContent + '</div>');
+                }
+
+            }).fail(function(xhr) {
+                console.log(xhr.responseJSON);
+            });
+        };
+
+        setInterval(() => {
+            discordRequest();
+        }, interval);
     }
 };
