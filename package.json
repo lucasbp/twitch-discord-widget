@@ -13,8 +13,7 @@
   "scripts": {
     "cert": "node bin/generate_cert.js server",
     "build": "webpack -p",
-    "start": "webpack-dev-server --mode development",
-    "host": "webpack-dev-server --mode development --devrig"
+    "start": "webpack-dev-server --mode development"
   },
   "dependencies": {},
   "devDependencies": {
