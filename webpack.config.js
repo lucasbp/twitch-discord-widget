@@ -43,7 +43,7 @@ module.exports = (env, argv) => {
             panel: glob.sync('./src/pages/panel/**/*')
         },
         optimization: {
-            minimize: true,
+            minimize: true
         },
         output: {
             path: bundlePath,
@@ -54,7 +54,10 @@ module.exports = (env, argv) => {
                 {
                     test: /\.(js|jsx)$/i,
                     exclude: /(node_modules|bower_components)/,
-                    loader: 'babel-loader'
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env']
+                    }
                 },
                 {
                     test: /\.s[ac]ss$/,

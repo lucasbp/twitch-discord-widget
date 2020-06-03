@@ -1,3 +1,5 @@
+'use strict';
+
 Twitch.ext.onContext((context) => {
     let theme = context.theme;
 

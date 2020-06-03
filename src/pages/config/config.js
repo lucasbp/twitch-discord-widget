@@ -1,3 +1,5 @@
+'use strict';
+
 $(document).ready(function() {
     $('#configs-form').submit(function(e) {
         e.preventDefault();
