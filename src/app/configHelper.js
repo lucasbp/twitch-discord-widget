@@ -1,6 +1,6 @@
 'use strict';
 
-const ConfigHelper = {
+window.ConfigHelper = {
 
     get: function() {
         if (typeof Twitch.ext.configuration.broadcaster == "undefined") {
@@ -15,4 +15,4 @@ const ConfigHelper = {
         Twitch.ext.configuration.set('broadcaster', '1', JSON.stringify(data));
     }
 
-}
+};

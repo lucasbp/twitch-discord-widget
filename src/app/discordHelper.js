@@ -1,6 +1,6 @@
 'use strict';
 
-const DiscordHelper = {
+window.DiscordHelper = {
 
     request: function() {
         let cfg = ConfigHelper.get();
@@ -12,4 +12,4 @@ const DiscordHelper = {
         });
     }
 
-}
+};
