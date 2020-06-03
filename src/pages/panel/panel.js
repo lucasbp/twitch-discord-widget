@@ -19,13 +19,13 @@ Twitch.ext.configuration.onChanged(() => {
 const PanelController = {
 
     init: function() {
-        PanelController.timer();
+        PanelController.call();
     },
 
     timer: function() {
         let interval = 15 * (1000 * 60);
 
-        setInterval(() => {
+        setInterval(function() {
             PanelController.call();
         }, interval);
     },
@@ -36,9 +36,11 @@ const PanelController = {
         discordRequest.done(function(data) {
             let membersContent = "";
 
+            /*
             if (data.instant_invite) {
                 $('.widgetLogo, .widgetBtnConnect').attr('href', data.instant_invite);
             }
+            */
 
             $('.widgetHeaderCount').html(`<strong>${data.presence_count}</strong> Members Online`);
 
