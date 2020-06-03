@@ -30,7 +30,6 @@ var discordPanel = {
 
             for (var i in data.members) {
                 let status = data.members[i].status;
-
                 status = (status.charAt(0).toUpperCase() + status.slice(1));
 
                 membersContent += `<div class="widgetMember-s">
@@ -39,7 +38,7 @@ var discordPanel = {
                                             <span class="widgetMemberStatus widgetMemberStatus${status}"></span>
                                         </div>
                                         <span class="widgetMemberName">${data.members[i].username}</span>
-                                        <span class="widgetMemberGame">VALORANT</span>
+                                        <!--<span class="widgetMemberGame">VALORANT</span>-->
                                     </div>`;
             }
 
