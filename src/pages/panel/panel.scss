@@ -399,21 +399,21 @@ a img {
 	font-family: Whitney;
 	font-style: normal;
 	font-weight: 500;
-	src: url("fonts/e8acd7d9bf6207f99350ca9f9e23b168.woff") format("woff")
+	src: url("assets/fonts/e8acd7d9bf6207f99350ca9f9e23b168.woff") format("woff")
 }
 
 @font-face {
 	font-family: Whitney;
 	font-style: medium;
 	font-weight: 600;
-	src: url("fonts/3bdef1251a424500c1b3a78dea9b7e57.woff") format("woff")
+	src: url("assets/fonts/3bdef1251a424500c1b3a78dea9b7e57.woff") format("woff")
 }
 
 @font-face {
 	font-family: Whitney;
 	font-style: bold;
 	font-weight: 700;
-	src: url("fonts/8e12fb4f14d9c4592eb8ec9f22337b04.woff") format("woff")
+	src: url("assets/fonts/8e12fb4f14d9c4592eb8ec9f22337b04.woff") format("woff")
 }
 
 * {
@@ -470,7 +470,7 @@ body {
 }
 
 .widgetLogo {
-	background: url("images/35d75407bd75d70e84e945c9f879bab8.svg") 50% no-repeat;
+	background: url("assets/images/35d75407bd75d70e84e945c9f879bab8.svg") 50% no-repeat;
 	width: 124px;
 	height: 34px;
 	background-size: 124px 34px;
@@ -558,7 +558,7 @@ body {
 
 .widgetBody {
 	background-color: #202225;
-	background-image: url("images/db9fd9dac08621e31b06609781c8851c.png"), url("images/1c7d080332a1c9778182bc19c2f407bc.png");
+	background-image: url("assets/images/db9fd9dac08621e31b06609781c8851c.png"), url("images/1c7d080332a1c9778182bc19c2f407bc.png");
 	background-size: 200px 180px, 110px 130px;
 	background-position: 0 100%, 100% 100%;
 	background-repeat: no-repeat, no-repeat;
@@ -677,11 +677,11 @@ body {
 }
 
 .widgetIconMute {
-	background-image: url("images/a5bbc9918fae3a388beca5831f49e1c4.svg")
+	background-image: url("assets/images/a5bbc9918fae3a388beca5831f49e1c4.svg")
 }
 
 .widgetIconDeaf {
-	background-image: url("images/ae3f569adb173a871434acb93bbf30a7.svg")
+	background-image: url("assets/images/ae3f569adb173a871434acb93bbf30a7.svg")
 }
 
 ::-webkit-scrollbar {
@@ -713,7 +713,7 @@ body {
 }
 
 .widget-theme-light .widgetBody {
-	background-image: url("images/319c6196da7ea2876ecf145b988e73a7.png"), url("images/8c7c66b44b1087f6ca9edc6cc1245bec.png")
+	background-image: url("assets/images/319c6196da7ea2876ecf145b988e73a7.png"), url("assets/images/8c7c66b44b1087f6ca9edc6cc1245bec.png")
 }
 
 .widget-theme-light .widgetBtnConnect,

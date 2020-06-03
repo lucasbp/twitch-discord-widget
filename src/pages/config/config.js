@@ -38,7 +38,7 @@ $(document).ready(function() {
 
 });
 
-twitch.configuration.onChanged(() => {
+Twitch.ext.configuration.onChanged(() => {
     let cfg = ConfigHelper.get();
 
     if (cfg) {

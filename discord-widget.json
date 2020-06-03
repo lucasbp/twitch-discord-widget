@@ -4,7 +4,7 @@
   "backendFolderName": "",
   "certificateExceptions": [],
   "extensionViews": [],
-  "frontendCommand": "",
+  "frontendCommand": "node run host",
   "frontendFolderName": "public",
   "manifest": {
     "anchor": "panel",
