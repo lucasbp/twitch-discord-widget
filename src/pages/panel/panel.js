@@ -64,7 +64,7 @@ const PanelController = {
             }
 
             if (membersContent != "") {
-                $('.widgetBody div').remove();
+                $('.widgetMember-s').parent('div').remove();
                 $('.widgetBody').append('<div>' + membersContent + '</div>');
             }
 
