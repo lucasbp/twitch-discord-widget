@@ -20,6 +20,7 @@ const PanelController = {
 
     init: function() {
         PanelController.call();
+        PanelController.timer();
     },
 
     timer: function() {
@@ -31,7 +32,8 @@ const PanelController = {
     },
 
     call: function() {
-        let discordRequest = DiscordHelper.request();
+        let cfg = ConfigHelper.get();
+        let discordRequest = DiscordHelper.request(cfg.serverId);
 
         discordRequest.done(function(data) {
             let membersContent = "";
@@ -42,10 +44,11 @@ const PanelController = {
             }
             */
 
-            $('.widgetHeaderCount').html(`<strong>${data.presence_count}</strong> Members Online`);
+            $('.widgetHeaderCount').html(`<strong>${data.presence_count}</strong> Member${data.presence_count > 1 ? 's' : ''} Online`);
 
             for (var i in data.members) {
                 let member = data.members[i];
+                let game = (member.game ? `<span class="widgetMemberGame">${member.game.name}</span>` : '');
                 let status = member.status;
 
                 status = (status.charAt(0).toUpperCase() + status.slice(1));
@@ -56,16 +59,18 @@ const PanelController = {
                                             <span class="widgetMemberStatus widgetMemberStatus${status}"></span>
                                         </div>
                                         <span class="widgetMemberName">${member.username}</span>
-                                        <!--<span class="widgetMemberGame">VALORANT</span>-->
+                                        ${game}
                                     </div>`;
             }
 
             if (membersContent != "") {
+                $('.widgetBody div').remove();
                 $('.widgetBody').append('<div>' + membersContent + '</div>');
             }
 
         }).fail(function(xhr) {
-            console.log(xhr.responseJSON);
+            let response = xhr.responseJSON;
+            let error = `${response.message} (#${response.code})`;
         });
 
         return discordRequest;

@@ -4,41 +4,58 @@ $(document).ready(function() {
     $('#configs-form').submit(function(e) {
         e.preventDefault();
 
-        $('#config-submit').attr('disabled', true);
-        $('.success, .error').html('').hide();
+        let serverId = $('#server-id').val();
 
-        let status = {
-            error: false,
-            errorMessage: null
-        };
+        ConfigController.formClear();
 
-        if ( ! $('#server-id').val()) {
-            status.error = true;
-            status.errorMessage = "Server ID cannot be empty!";
-        }
-
-        if (status.error) {
-            $('.error').html(status.errorMessage).show();
-            $('#config-submit').attr('disabled', false);
+        if ( ! serverId) {
+            ConfigController.formError('Server ID cannot be empty!');
         }
         else {
-            var form = {
-                'serverId': $('#server-id').val()
-            };
+            let validate = DiscordHelper.request(serverId);
 
-            ConfigHelper.set(form);
+            validate.done(function(data) {
+                var form = {
+                    'serverId': $('#server-id').val()
+                };
 
-            if (ConfigHelper.get()) {
-                $('.success').html('Extension enabled successfully!').show();
-                $('#config-submit').attr('disabled', false);
-            }
-            else {
-                $('.error').html('The configuration could not be saved, please try again later!').show();
-            }
+                ConfigHelper.set(form);
+
+                if (ConfigHelper.get()) {
+                    ConfigController.formSuccess(`Extension enabled successfully!<br />Community: <strong>${data.name}</strong>`);
+                }
+                else {
+                    ConfigController.formError('The configuration could not be saved, please try again later!');
+                }
+            }).fail(function(xhr) {
+                let response = xhr.responseJSON;
+                let error = `${response.message} (#${response.code})`;
+
+                ConfigController.formError(error);
+            });
         }
     });
 
 });
+
+const ConfigController = {
+
+    formClear: function() {
+        $('#config-submit').attr('disabled', true);
+        $('.success, .error').html('').hide();
+    },
+
+    formError: function(message) {
+        $('.error').html(message).show();
+        $('#config-submit').attr('disabled', false);
+    },
+
+    formSuccess: function(message) {
+        $('.success').html(message).show();
+        $('#config-submit').attr('disabled', false);
+    }
+
+}
 
 Twitch.ext.configuration.onChanged(() => {
     let cfg = ConfigHelper.get();
