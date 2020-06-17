@@ -1,4 +1,4 @@
-#twitch-discord-widget
+# twitch-discord-widget
 
 ## License
 
