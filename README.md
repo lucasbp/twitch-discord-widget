@@ -13,10 +13,10 @@ https://dashboard.twitch.tv/extensions/ykchewy6hn5rtwvh9ijgw0m7zey4gu
 
 `npm install`
 
-## Development
+### Development
 `npm run start`
 
-## Building (Distribution Files)
+### Building (Distribution Files)
 `npm run buil`
 
 ## Reporting bugs
