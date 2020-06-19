@@ -9,7 +9,7 @@ Twitch panel for Discord chat, with number of users online, status and current g
 https://dashboard.twitch.tv/extensions/ykchewy6hn5rtwvh9ijgw0m7zey4gu
 
 ## Installation
-`git pull https://github.com/lucasbp/twitch-discord-widget`
+`git clone https://github.com/lucasbp/twitch-discord-widget`
 
 `npm install`
 
