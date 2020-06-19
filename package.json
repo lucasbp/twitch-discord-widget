@@ -1,9 +1,14 @@
 {
-  "name": "twitch-ext-discord-widget",
+  "name": "twitch-discord-widget",
   "description": "Twitch Extension - Discord Widget",
-  "author": "LPSX <support@lpsx.com.br>",
+  "author": "LPSX <support@lpsx.com.br> (https://lpsx.com.br)",
   "version": "1.0.1",
-  "private": true,
+  "license": "MIT",
+  "homepage": "https://dashboard.twitch.tv/extensions/ykchewy6hn5rtwvh9ijgw0m7zey4gu",
+  "bugs": {
+    "url": "https://github.com/lucasbp/twitch-discord-widget/issues",
+    "email": "support@lpsx.com.br"
+  },
   "keywords": [
     "twitch",
     "extension",
