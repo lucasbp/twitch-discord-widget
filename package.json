@@ -2,7 +2,7 @@
   "name": "twitch-ext-discord-widget",
   "description": "Twitch Extension - Discord Widget",
   "author": "LPSX <support@lpsx.com.br>",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "keywords": [
     "twitch",
