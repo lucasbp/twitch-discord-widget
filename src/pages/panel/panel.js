@@ -27,50 +27,80 @@ const PanelController = {
         let interval = 15 * (1000 * 60);
 
         setInterval(function() {
+            PanelController.loader('show');
             PanelController.call();
         }, interval);
+    },
+
+    loader: function(event) {
+        if (event == 'show') {
+            if ( ! $('.widgetBody').hasClass('widgetLoading')) {
+                $('.widgetBody').addClass('widgetLoading');
+            }
+
+            if ($('.widgetBody').find('.spinner').length == 0) {
+                $('.widgetBody').append(`<span class="spinner">
+                                            <span class="inner">
+                                                <span class="wanderingCubesItem"></span>
+                                                <span class="wanderingCubesItem"></span>
+                                            </span>
+                                        </span>`);
+            }
+        }
+        else if (event == 'hide') {
+            $('.widgetBody').removeClass('widgetLoading');
+            $('.widgetBody .spinner').remove();
+        }
+    },
+
+    error: function(message) {
+        $('.widgetBody').append(`<div class="widgetError">${message}</div>`);
     },
 
     call: function() {
         let cfg = ConfigHelper.get();
         let discordRequest = DiscordHelper.request(cfg.serverId);
 
-        discordRequest.done(function(data) {
-            let membersContent = "";
+        $('.widgetError').remove();
+        $('.widgetTitle .widgetMember-s').remove();
 
-            /*
+        discordRequest.done(function(data) {
+            let community = `<div class="widgetTitle">${data.name}</div>`;
+
             if (data.instant_invite) {
                 $('.widgetLogo, .widgetBtnConnect').attr('href', data.instant_invite);
             }
-            */
 
             $('.widgetHeaderCount').html(`<strong>${data.presence_count}</strong> Member${data.presence_count > 1 ? 's' : ''} Online`);
 
             for (var i in data.members) {
                 let member = data.members[i];
-                let game = (member.game ? `<span class="widgetMemberGame">${member.game.name}</span>` : '');
-                let status = member.status;
+                let userGame = (member.game ? `<span class="widgetMemberGame">${member.game.name}</span>` : '');
+                let userStatus = member.status;
 
-                status = (status.charAt(0).toUpperCase() + status.slice(1));
+                userStatus = (userStatus.charAt(0).toUpperCase() + userStatus.slice(1));
 
-                membersContent += `<div class="widgetMember-s">
-                                        <div class="widgetMemberAvatar">
-                                            <img alt="" src="${member.avatar_url}">
-                                            <span class="widgetMemberStatus widgetMemberStatus${status}"></span>
-                                        </div>
-                                        <span class="widgetMemberName">${member.username}</span>
-                                        ${game}
-                                    </div>`;
+                community += `<div class="widgetMember-s">
+                                    <div class="widgetMemberAvatar">
+                                        <img alt="" src="${member.avatar_url}">
+                                        <span class="widgetMemberStatus widgetMemberStatus${status}"></span>
+                                    </div>
+                                    <span class="widgetMemberName">${member.username}</span>
+                                    ${userGame}
+                                </div>`;
             }
 
-            if (membersContent != "") {
-                $('.widgetMember-s').parent('div').remove();
-                $('.widgetBody').append('<div>' + membersContent + '</div>');
+            if (community != "") {
+                $('.widgetBody').append(community);
             }
 
         }).fail(function(xhr) {
             let response = xhr.responseJSON;
-            let error = `${response.message} (#${response.code})`;
+            let error = (response && response.hasOwnProperty('message') ? `${response.message} (#${response.code})` : 'Unknown error!');
+
+            PanelController.error(error);
+        }).always(function() {
+            PanelController.loader('hide');
         });
 
         return discordRequest;

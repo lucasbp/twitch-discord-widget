@@ -29,7 +29,7 @@ $(document).ready(function() {
                 }
             }).fail(function(xhr) {
                 let response = xhr.responseJSON;
-                let error = `${response.message} (#${response.code})`;
+                let error = (response && response.hasOwnProperty('message') ? `${response.message} (#${response.code})` : 'Unknown error!');
 
                 ConfigController.formError(error);
             });

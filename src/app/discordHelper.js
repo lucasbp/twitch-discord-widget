@@ -6,8 +6,8 @@ window.DiscordHelper = {
         let discordApi = 'https://discordapp.com/api/guilds/' + serverId + '/widget.json';
 
         return $.ajax({
-            method: 'GET',
-            url: discordApi
+            'method': 'GET',
+            'url': discordApi
         });
     }
 

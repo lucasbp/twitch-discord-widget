@@ -21,10 +21,10 @@ module.exports = (env, argv) => {
         devServer = {
             contentBase: path.join(__dirname, 'public'),
             host: 'localhost',
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-            },
             port: 8080,
+            headers: {
+                'Access-Control-Allow-Origin': '*'
+            }
         };
 
         if (fs.existsSync(path.resolve(__dirname, 'conf/server.key'))) {

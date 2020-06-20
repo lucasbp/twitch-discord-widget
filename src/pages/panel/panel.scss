@@ -571,6 +571,11 @@ body {
 	overflow-y: scroll
 }
 
+.widgetBody .widgetError {
+	color: red;
+	font-weight: bold;
+}
+
 .widgetChannel {
 	margin-top: 12px
 }
@@ -589,7 +594,7 @@ body {
 	margin-bottom: 12px
 }
 
-.widgetMembersOnline {
+.widgetTitle {
 	color: #8a8e94;
 	font-weight: 600;
 	text-transform: uppercase;
