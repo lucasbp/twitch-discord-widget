@@ -69,6 +69,11 @@ const PanelController = {
 
             if (data.instant_invite) {
                 $('.widgetLogo, .widgetBtnConnect').attr('href', data.instant_invite);
+                $('.widgetBtnConnect').show();
+            }
+            else {
+                $('.widgetBtnConnect').hide();
+                $('.widgetLogo, .widgetBtnConnect').removeAttr('href');
             }
 
             $('.widgetHeaderCount').html(`<strong>${data.presence_count}</strong> Member${data.presence_count > 1 ? 's' : ''} Online`);
@@ -93,11 +98,9 @@ const PanelController = {
             if (community != "") {
                 $('.widgetBody').append(community);
             }
-
         }).fail(function(xhr) {
             let response = xhr.responseJSON;
             let error = (response && response.hasOwnProperty('message') ? `${response.message} (#${response.code})` : 'Unknown error!');
-
             PanelController.error(error);
         }).always(function() {
             PanelController.loader('hide');
