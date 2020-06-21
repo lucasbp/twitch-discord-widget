@@ -61,8 +61,7 @@ const PanelController = {
         let cfg = ConfigHelper.get();
         let discordRequest = DiscordHelper.request(cfg.serverId);
 
-        $('.widgetError').remove();
-        $('.widgetTitle .widgetMember-s').remove();
+        $('.widgetError, .widgetTitle, .widgetMember-s').remove();
 
         discordRequest.done(function(data) {
             let community = `<div class="widgetTitle">${data.name}</div>`;
