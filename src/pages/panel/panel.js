@@ -85,7 +85,7 @@ const PanelController = {
                 community += `<div class="widgetMember-s">
                                     <div class="widgetMemberAvatar">
                                         <img alt="" src="${member.avatar_url}">
-                                        <span class="widgetMemberStatus widgetMemberStatus${status}"></span>
+                                        <span class="widgetMemberStatus widgetMemberStatus${userStatus}"></span>
                                     </div>
                                     <span class="widgetMemberName">${member.username}</span>
                                     ${userGame}
