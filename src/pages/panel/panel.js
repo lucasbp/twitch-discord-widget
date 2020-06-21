@@ -61,6 +61,8 @@ const PanelController = {
         let cfg = ConfigHelper.get();
         let discordRequest = DiscordHelper.request(cfg.serverId);
 
+        $('.widgetFooter').fadeOut();
+        $('.widgetLogo, .widgetBtnConnect').removeAttr('href');
         $('.widgetError, .widgetTitle, .widgetMember-s').remove();
 
         discordRequest.done(function(data) {
@@ -68,11 +70,7 @@ const PanelController = {
 
             if (data.instant_invite) {
                 $('.widgetLogo, .widgetBtnConnect').attr('href', data.instant_invite);
-                $('.widgetBtnConnect').show();
-            }
-            else {
-                $('.widgetBtnConnect').hide();
-                $('.widgetLogo, .widgetBtnConnect').removeAttr('href');
+                $('.widgetFooter').fadeIn();
             }
 
             $('.widgetHeaderCount').html(`<strong>${data.presence_count}</strong> Member${data.presence_count > 1 ? 's' : ''} Online`);
