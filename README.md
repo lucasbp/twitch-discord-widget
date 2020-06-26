@@ -17,7 +17,7 @@ https://dashboard.twitch.tv/extensions/ykchewy6hn5rtwvh9ijgw0m7zey4gu
 `npm run start`
 
 ### Building (Distribution Files)
-`npm run buil`
+`npm run build`
 
 ## Reporting bugs
 Please file any relevant issues [on Github](https://github.com/lucasbp/twitch-discord-widget/issues).
