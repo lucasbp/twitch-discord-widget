@@ -61,8 +61,8 @@ const PanelController = {
         let cfg = ConfigHelper.get();
         let discordRequest = DiscordHelper.request(cfg.serverId);
 
-        $('.widgetFooter').fadeOut();
-        $('.widgetLogo, .widgetBtnConnect').removeAttr('href');
+        //$('.widgetFooter').fadeOut();
+        //$('.widgetLogo, .widgetBtnConnect').removeAttr('href');
         $('.widgetError, .widgetTitle, .widgetMember-s').remove();
 
         discordRequest.done(function(data) {
