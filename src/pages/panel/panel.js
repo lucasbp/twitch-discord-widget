@@ -68,10 +68,12 @@ const PanelController = {
         discordRequest.done(function(data) {
             let community = `<div class="widgetTitle">${data.name}</div>`;
 
+            /* Disable by policy 4.6.1 [https://dev.twitch.tv/docs/extensions/guidelines-and-policies]
             if (data.instant_invite) {
                 $('.widgetLogo, .widgetBtnConnect').attr('href', data.instant_invite);
                 $('.widgetFooter').fadeIn();
             }
+            */
 
             $('.widgetHeaderCount').html(`<strong>${data.presence_count}</strong> Member${data.presence_count > 1 ? 's' : ''} Online`);
 
