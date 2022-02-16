@@ -16,7 +16,7 @@ https://dashboard.twitch.tv/extensions/ykchewy6hn5rtwvh9ijgw0m7zey4gu
 ### Development
 `npm run start`
 
-### Building (Distribution Files)
+### Building (distribution files)
 `npm run build`
 
 ## Reporting bugs
@@ -27,4 +27,4 @@ Written by [Lucas Passos](https://github.com/lucasbp)
 
 ## License
 - This library is licensed under the **[MIT](http://opensource.org/licenses/mit-license.php)** license
-- Copyright 2020 © <a href="https://lpsx.com.br" target="_blank">LPSX</a>.
+- Copyright 2022 © <a href="https://lpsx.com.br" target="_blank">LPSX</a>.

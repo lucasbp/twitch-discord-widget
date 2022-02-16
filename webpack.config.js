@@ -1,4 +1,3 @@
-const fs = require('fs');
 const path = require('path');
 const glob = require('glob');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -19,20 +18,13 @@ module.exports = (env, argv) => {
 
     if (environment == 'development') {
         devServer = {
-            contentBase: path.join(__dirname, 'public'),
+            static: './public',
             host: 'localhost',
             port: 8080,
             headers: {
                 'Access-Control-Allow-Origin': '*'
             }
         };
-
-        if (fs.existsSync(path.resolve(__dirname, 'conf/server.key'))) {
-            devServer.https = {
-                key: fs.readFileSync(path.resolve(__dirname, 'conf/server.key')),
-                cert: fs.readFileSync(path.resolve(__dirname, 'conf/server.crt')),
-            };
-        }
     }
 
     return {
@@ -66,14 +58,14 @@ module.exports = (env, argv) => {
                         {
                             loader: 'css-loader',
                             options: {
-                                sourceMap: true,
+                                sourceMap: (environment == 'development' ? true : false),
                                 url: false
                             }
                         },
                         {
                             loader: 'sass-loader',
                             options: {
-                                sourceMap: true,
+                                sourceMap: (environment == 'development' ? true : false),
                                 sassOptions: {
                                     outputStyle: 'compressed'
                                 }
