@@ -1,18 +1,20 @@
 'use strict';
 
+const twitch = window.Twitch.ext;
+
 window.ConfigHelper = {
 
     get: function() {
-        if (typeof Twitch.ext.configuration.broadcaster == "undefined") {
+        if (typeof twitch.configuration.broadcaster == "undefined") {
             return {};
         }
         else {
-            return JSON.parse(Twitch.ext.configuration.broadcaster.content);
+            return JSON.parse(twitch.configuration.broadcaster.content);
         }
     },
 
     set: function(data) {
-        Twitch.ext.configuration.set('broadcaster', '1', JSON.stringify(data));
+        twitch.configuration.set('broadcaster', '1', JSON.stringify(data));
     }
 
 };

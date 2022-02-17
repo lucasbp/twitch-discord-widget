@@ -1,6 +1,8 @@
 'use strict';
 
-Twitch.ext.onContext((context) => {
+const twitch = window.Twitch.ext;
+
+twitch.onContext((context) => {
     let theme = context.theme;
 
     if ($('#discord-widget').length > 0 && $('#discord-widget').is(':visible')) {
@@ -12,7 +14,7 @@ Twitch.ext.onContext((context) => {
     }
 });
 
-Twitch.ext.configuration.onChanged(() => {
+twitch.configuration.onChanged(() => {
     PanelController.init();
 });
 
