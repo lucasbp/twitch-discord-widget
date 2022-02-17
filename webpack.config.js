@@ -1,3 +1,4 @@
+const fs = require('fs');
 const path = require('path');
 const glob = require('glob');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -9,11 +10,11 @@ module.exports = (env, argv) => {
     let environment;
     let devServer;
 
-    if ('mode' in argv && argv.mode == 'development') {
-        environment = 'development';
+    if ('mode' in argv && argv.mode == 'production') {
+        environment = 'production';
     }
     else {
-        environment = 'production';
+        environment = 'development';
     }
 
     if (environment == 'development') {
@@ -25,6 +26,13 @@ module.exports = (env, argv) => {
                 'Access-Control-Allow-Origin': '*'
             }
         };
+
+        if (fs.existsSync(path.resolve(__dirname, 'conf/server.key'))) {
+            devServer.https = {
+                key: fs.readFileSync(path.resolve(__dirname, 'conf/server.key')),
+                cert: fs.readFileSync(path.resolve(__dirname, 'conf/server.crt')),
+            };
+        }
     }
 
     return {
@@ -85,7 +93,7 @@ module.exports = (env, argv) => {
                 ]
             }),
         ],
-        devtool: "source-map",
+        devtool: (environment == 'development' ? 'source-map' : false),
         devServer
     };
 }

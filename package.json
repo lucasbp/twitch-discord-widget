@@ -16,6 +16,7 @@
     "widget"
   ],
   "scripts": {
+    "cert": "node bin/generate_cert.js server",
     "build": "webpack --mode production",
     "start": "webpack-dev-server --mode development"
   },
