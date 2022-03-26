@@ -2,7 +2,7 @@
   "name": "twitch-discord-widget",
   "description": "Twitch - Discord Widget",
   "author": "LPSX <support@lpsx.com.br> (https://lpsx.com.br)",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "license": "MIT",
   "homepage": "https://dashboard.twitch.tv/extensions/ykchewy6hn5rtwvh9ijgw0m7zey4gu",
   "bugs": {
@@ -22,16 +22,16 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@babel/core": "^7.17.4",
+    "@babel/core": "^7.17.8",
     "@babel/preset-env": "^7.16.11",
-    "babel-loader": "^8.2.3",
+    "babel-loader": "^8.2.4",
     "copy-webpack-plugin": "^10.2.4",
-    "css-loader": "^6.6.0",
-    "mini-css-extract-plugin": "^2.5.3",
+    "css-loader": "^6.7.1",
+    "mini-css-extract-plugin": "^2.6.0",
     "node-sass": "^7.0.1",
     "post-loader": "^2.0.0",
     "sass-loader": "^12.6.0",
-    "webpack": "^5.69.0",
+    "webpack": "^5.70.0",
     "webpack-cli": "^4.9.2",
     "webpack-dev-server": "^4.7.4"
   }

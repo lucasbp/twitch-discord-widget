@@ -28,10 +28,13 @@ module.exports = (env, argv) => {
         };
 
         if (fs.existsSync(path.resolve(__dirname, 'conf/server.key'))) {
-            devServer.https = {
-                key: fs.readFileSync(path.resolve(__dirname, 'conf/server.key')),
-                cert: fs.readFileSync(path.resolve(__dirname, 'conf/server.crt')),
-            };
+            devServer.server = {
+                type: 'https',
+                options: {
+                    key: fs.readFileSync(path.resolve(__dirname, 'conf/server.key')),
+                    cert: fs.readFileSync(path.resolve(__dirname, 'conf/server.crt')),
+                }
+            }
         }
     }
 
